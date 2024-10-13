@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        faded: "var(--faded)",
         card: "var(--card)",
         "card-selected": "var(--card-selected)",
         "card-selected-header": "var(--card-selected-header)",

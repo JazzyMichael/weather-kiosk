@@ -1,22 +1,6 @@
 import { Switch } from "@headlessui/react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useWeather } from "../weather-context";
-
-const getTime = () => {
-  const now = new Date();
-  let hours = now.getHours();
-  const minutes = now.getMinutes();
-  const ampm = hours >= 12 ? "PM" : "AM";
-
-  // Convert to 12-hour format
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-
-  // Pad minutes with a leading zero if needed
-  const minutesStr = minutes < 10 ? "0" + minutes : minutes;
-
-  return `${hours}:${minutesStr} ${ampm}`;
-};
 
 const SimpleCard = ({
   day,
@@ -80,19 +64,12 @@ const DetailedCard = ({
         </div>
 
         <div className="grid grid-cols-2 grid-rows-4 grid-flow-col gap-1">
-          {properties.map(({ label, value }, i) =>
-            i === 0 ? (
-              <div key={i} className="col-span-2 text-xs">
-                <span className="text-gray-500">{label} </span>
-                <span className="text-black font-bold">{value}</span>
-              </div>
-            ) : (
-              <div key={i} className="text-xs">
-                <span className="text-gray-500">{label} </span>
-                <span className="text-black font-bold">{value}</span>
-              </div>
-            )
-          )}
+          {properties.map(({ label, value }, i) => (
+            <div key={i} className={i === 0 ? "col-span-2 text-xs" : "text-xs"}>
+              <span className="text-gray-500">{label} </span>
+              <span className="text-black font-bold">{value}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -103,7 +80,7 @@ export default function WeekSection() {
   const [enabled, setEnabled] = useState(false);
   const [selected, setSelected] = useState(0);
 
-  const { weatherData } = useWeather();
+  const { weatherData, timestamp } = useWeather();
 
   const dayNames = [
     "Sunday",
@@ -118,8 +95,6 @@ export default function WeekSection() {
   const dayIndex = new Date().getDay();
 
   const weekData = [...dayNames.splice(dayIndex), ...dayNames];
-
-  const time = useMemo(() => getTime(), []);
 
   return (
     <div className="flex-grow">
@@ -156,7 +131,7 @@ export default function WeekSection() {
               <DetailedCard
                 key={i}
                 day={day}
-                time={time}
+                time={timestamp}
                 weather={weatherData.forecast.forecastday[i]}
               />
             ) : (

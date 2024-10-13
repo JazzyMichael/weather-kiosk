@@ -13,6 +13,7 @@ body {
 .dark {
   --background: #111015;
   --foreground: #ffffff;
+  --faded: #818085;
 
   --card: #1b1b1d;
 
@@ -41,8 +42,9 @@ body {
 .light {
   --background: #fffeee;
   --foreground: #111015;
+  --faded: #818085;
 
-  --card: #ffffff;
+  --card: #a0cfff;
 
   --card-selected: #bbd7ec;
   --card-selected-header: #aecadf;
