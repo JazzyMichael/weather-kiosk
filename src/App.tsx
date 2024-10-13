@@ -1,14 +1,9 @@
-import ThemeToggle from "./components/ThemeToggle";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div className="bg-background text-foreground">
-      <header>
-        <p className="text-xs">Lorem ipsum</p>
-        <p className="text-xl">Lorem ipsum</p>
-      </header>
-
-      <ThemeToggle />
+      <Header />
     </div>
   );
 }

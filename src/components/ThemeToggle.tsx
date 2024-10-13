@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Switch } from "@headlessui/react";
-import { Sun, Moon } from "../icons";
+import { MoonIcon, SunIcon } from "../icons";
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState(
@@ -28,7 +28,7 @@ export default function ThemeToggle() {
         aria-hidden="true"
         className="pointer-events-none inline-flex items-center justify-center size-10 -translate-x-9 rounded-full bg-foreground group-data-[checked]:bg-[#D8E9F9] group-data-[checked]:translate-x-9 ring-0 transition duration-200 ease-in-out"
       >
-        {theme === "dark" ? <Moon /> : <Sun />}
+        {theme === "dark" ? <MoonIcon /> : <SunIcon />}
       </span>
     </Switch>
   );
