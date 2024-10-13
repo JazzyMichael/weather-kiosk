@@ -39,10 +39,10 @@ body {
 }
 
 .light {
-  --background: #ffffff;
+  --background: #fffeee;
   --foreground: #111015;
 
-  --card: #1b1b1d;
+  --card: #ffffff;
 
   --card-selected: #bbd7ec;
   --card-selected-header: #aecadf;

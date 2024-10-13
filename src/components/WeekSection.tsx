@@ -1,5 +1,6 @@
 import { Switch } from "@headlessui/react";
 import { useMemo, useState } from "react";
+import { useWeather } from "../weather-context";
 
 const getTime = () => {
   const now = new Date();
@@ -17,7 +18,15 @@ const getTime = () => {
   return `${hours}:${minutesStr} ${ampm}`;
 };
 
-const SimpleCard = ({ day, onClick }: { day: string; onClick?: Function }) => (
+const SimpleCard = ({
+  day,
+  weather,
+  onClick,
+}: {
+  day: string;
+  weather: any;
+  onClick?: Function;
+}) => (
   <div
     onClick={(e) => onClick && onClick(e)}
     className="h-[226px] rounded-[30px] bg-[#1B1B1D] min-w-[96px] flex flex-col items-center justify-between pb-5"
@@ -26,16 +35,23 @@ const SimpleCard = ({ day, onClick }: { day: string; onClick?: Function }) => (
       {day.substring(0, 3)}
     </div>
 
-    <img
-      src="https://cdn.weatherapi.com/weather/64x64/day/113.png"
-      className="size-[50px]"
-    />
+    <img src={weather.day.condition.icon} className="size-[50px]" />
 
-    <span className="text-[32px] font-bold">16&deg;</span>
+    <span className="text-[32px] font-bold">
+      {Math.round(weather?.day?.avgtemp_f)}&deg;
+    </span>
   </div>
 );
 
-const DetailedCard = ({ day, time }: { day: string; time: string }) => {
+const DetailedCard = ({
+  day,
+  time,
+  weather,
+}: {
+  day: string;
+  time: string;
+  weather: any;
+}) => {
   const properties = [
     { label: "Real Feel", value: "18" },
     { label: "Wind N-E", value: "7km/h" },
@@ -60,7 +76,7 @@ const DetailedCard = ({ day, time }: { day: string; time: string }) => {
             16&deg;
           </span>
 
-          <img src="https://cdn.weatherapi.com/weather/64x64/day/113.png" />
+          <img src={weather.day.condition.icon} />
         </div>
 
         <div className="grid grid-cols-2 grid-rows-4 grid-flow-col gap-1">
@@ -86,6 +102,8 @@ const DetailedCard = ({ day, time }: { day: string; time: string }) => {
 export default function WeekSection() {
   const [enabled, setEnabled] = useState(false);
   const [selected, setSelected] = useState(0);
+
+  const { weatherData } = useWeather();
 
   const dayNames = [
     "Sunday",
@@ -132,13 +150,24 @@ export default function WeekSection() {
 
       {/* content */}
       <div className="w-full flex justify-between">
-        {weekData.map((day, i) =>
-          i === selected ? (
-            <DetailedCard key={i} day={day} time={time} />
-          ) : (
-            <SimpleCard key={i} day={day} onClick={() => setSelected(i)} />
-          )
-        )}
+        {weatherData?.forecast &&
+          weekData.map((day, i) =>
+            i === selected ? (
+              <DetailedCard
+                key={i}
+                day={day}
+                time={time}
+                weather={weatherData.forecast.forecastday[i]}
+              />
+            ) : (
+              <SimpleCard
+                key={i}
+                day={day}
+                weather={weatherData.forecast.forecastday[i]}
+                onClick={() => setSelected(i)}
+              />
+            )
+          )}
       </div>
     </div>
   );

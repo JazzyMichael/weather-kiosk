@@ -1,19 +1,20 @@
-import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { BellIcon, GridIcon, MagnifyingGlassIcon, MapPinIcon } from "../icons";
+import { useWeather } from "../weather-context";
 
 const avatarURL =
   "https://s3-alpha-sig.figma.com/img/c84f/8c6d/32c74800fa7451cf47a74ee4b186b79c?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Dpx7yreuDBp-15bABW8s1X9i6x7JgiVdDFtHjtwaY5l4O6t95x9o~IYGjXEkjjkivU3XMeFbNpDOuDO9V6pkxUdxVYMvgS69nipl8WYJod85gJh1IDY0K1ibc9yrUrq8T7GPLtxa3YmP-2p4nOLwRG2BgMuRa45nQEbmTELlh~qsWOgNvJeYGSau~tzNuR5Si4v9~lusRXckpWEX5oY3-N9r39YeGf9ituZnjXPnVO1H5zNjRzB~8PFnKtOUsmpMohYAv2lMbzx3By6Tp6S0SQSYv1plNuvOqcIkfU9wDnJKsWnt6BlBldnKLr9Xgh99eshGGRmdw03DQXuWRBUrsw__";
 
 export default function Header() {
-  const [location, setLocation] = useState("Dhaka, Bangladesh");
+  const { weatherData, loadWeatherData } = useWeather();
 
-  const search = (event: any) => {
+  const search = async (event: any) => {
     const term = event?.target?.value?.trim();
 
     if (term) {
-      setLocation(term);
+      await loadWeatherData(term);
     } else {
+      // clear input if it only contains spaces
       event.target.value = "";
     }
   };
@@ -30,10 +31,14 @@ export default function Header() {
             <BellIcon />
           </button>
 
-          <div className="flex items-center gap-2 text-foreground">
-            <MapPinIcon />
-            <span>{location}</span>
-          </div>
+          {weatherData?.location && (
+            <div className="flex items-center gap-2 text-foreground">
+              <MapPinIcon />
+              <span>
+                {weatherData?.location?.name}, {weatherData?.location?.region}
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="relative flex-grow inline-flex items-stretch focus-within:z-10 text-white max-w-[492px]">
