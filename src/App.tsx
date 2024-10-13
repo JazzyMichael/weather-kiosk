@@ -1,10 +1,14 @@
-import logo from "./logo.svg";
+import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
   return (
-    <div className="p-5">
-      <header className="text-xl">Test</header>
-      <img src={logo} alt="logo" />
+    <div className="bg-background text-foreground">
+      <header>
+        <p className="text-xs">Lorem ipsum</p>
+        <p className="text-xl">Lorem ipsum</p>
+      </header>
+
+      <ThemeToggle />
     </div>
   );
 }

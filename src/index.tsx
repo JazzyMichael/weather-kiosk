@@ -9,6 +9,9 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+const initialTheme = localStorage.getItem("theme") ?? "dark";
+document.body.classList.add(initialTheme);
+
 root.render(
   <React.StrictMode>
     <App />

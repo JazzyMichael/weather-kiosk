@@ -1,12 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Montserrat", "sans-serif";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.dark {
+  --background: #111015;
+  --foreground: #ffffff;
+
+  --card: #1b1b1d;
+
+  --card-selected: #bbd7ec;
+  --card-selected-header: #aecadf;
+  --card-selected-text: #0f0f11;
+  --card-selected-text-faded: #4f5658;
+
+  /* --card-weekly-header: #e5e5e5;
+  --card-weekly-content: #fdfdfd; */
+
+  /* --foreground: #fefefe; */
+
+  /* buttons, search, forecast/airquality background: #1E1E1E */
+
+  /* search placeholder: EDEDED */
+  /* header white text, todays overview card text: "FFFFFF */
+  /* faded todays overview: #818085 */
+  /* today/tomorrow faded text: #818085 */
+  /* weekly day names: #E5E5E5 */
+  /* weekly degrees: #FDFDFD */
+  /* other cities faded: 777777 */
+  /* other cities mid faded: EFEFEF */
+}
+
+.light {
+  --background: #ffffff;
+  --foreground: #111015;
+
+  --card: #1b1b1d;
+
+  --card-selected: #bbd7ec;
+  --card-selected-header: #aecadf;
+  --card-selected-text: #0f0f11;
+  --card-selected-text-faded: #4f5658;
 }

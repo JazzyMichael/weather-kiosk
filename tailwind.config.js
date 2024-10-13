@@ -2,7 +2,17 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        card: "var(--card)",
+        "card-selected": "var(--card-selected)",
+        "card-selected-header": "var(--card-selected-header)",
+        "card-selected-text": "var(--card-selected-text)",
+        "card-selected-text-faded": "var(--card-selected-text-faded)",
+      },
+    },
   },
   plugins: [],
 };
