@@ -19,37 +19,39 @@ export default function Header() {
   };
 
   return (
-    <header className="max-w-7xl mx-auto p-6 flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <button className="bg-[#1E1E1E] text-white h-[50px] w-[50px] rounded-full flex items-center justify-center">
-          <GridIcon />
-        </button>
+    <header className="w-full">
+      <div className="w-3/4 inline-flex justify-between">
+        <div className="inline-flex items-center gap-3">
+          <button className="bg-[#1E1E1E] text-white h-[50px] w-[50px] rounded-full flex items-center justify-center">
+            <GridIcon />
+          </button>
 
-        <button className="bg-[#1E1E1E] text-white h-[50px] w-[50px] rounded-full flex items-center justify-center">
-          <BellIcon />
-        </button>
+          <button className="bg-[#1E1E1E] text-white h-[50px] w-[50px] rounded-full flex items-center justify-center">
+            <BellIcon />
+          </button>
 
-        <div className="flex items-center gap-2 text-foreground">
-          <MapPinIcon />
-          <span>{location}</span>
+          <div className="flex items-center gap-2 text-foreground">
+            <MapPinIcon />
+            <span>{location}</span>
+          </div>
+        </div>
+
+        <div className="relative flex-grow inline-flex items-stretch focus-within:z-10 text-white max-w-[492px]">
+          <div className="pointer-events-none absolute inset-y-3 left-6">
+            <MagnifyingGlassIcon />
+          </div>
+          <input
+            id="search"
+            name="search"
+            autoComplete="off"
+            placeholder="Search City"
+            className="bg-[#1E1E1E] outline-none text-white text-sm block w-full h-[46px] rounded-lg py-1.5 pl-16 placeholder:text-white sm:text-sm sm:leading-6 focus:ring-2 focus:ring-foreground"
+            onKeyDown={(event) => event.key === "Enter" && search(event)}
+          />
         </div>
       </div>
 
-      <div className="relative flex items-stretch focus-within:z-10 text-white w-full max-w-[492px]">
-        <div className="pointer-events-none absolute inset-y-3 left-6">
-          <MagnifyingGlassIcon />
-        </div>
-        <input
-          id="search"
-          name="search"
-          autoComplete="off"
-          placeholder="Search City"
-          className="bg-[#1E1E1E] outline-none text-white text-sm block w-full h-[46px] rounded-lg py-1.5 pl-16 placeholder:text-white sm:text-sm sm:leading-6 focus:ring-2 focus:ring-foreground"
-          onKeyDown={(event) => event.key === "Enter" && search(event)}
-        />
-      </div>
-
-      <div className="flex items-center gap-4">
+      <div className="w-1/4 inline-flex justify-end gap-4">
         <ThemeToggle />
 
         <img
