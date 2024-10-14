@@ -32,33 +32,56 @@ export const WeatherProvider = ({
   children: React.ReactNode;
 }) => {
   const [weatherData, setWeatherData] = useState<any>({});
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const loadWeatherData = async (term: string) => {
-    const data = await fetch(apiURL + term).then((res) => res.json());
+  const loadWeatherData = async (searchTerm: string) => {
+    console.log("Loading", searchTerm);
 
-    setWeatherData(data);
+    try {
+      const data = await fetch(apiURL + searchTerm).then((res) => res.json());
+
+      setWeatherData({ ...data, searchTerm });
+    } catch (e) {
+      console.log("Could not load weather data", e);
+    }
   };
 
+  const temp = weatherData?.current?.temp_f;
   const windStatus = weatherData?.current?.wind_kph;
   const humidity = weatherData?.current?.humidity;
   const dewpoint = weatherData?.current?.dewpoint_f;
   const visibility = weatherData?.current?.vis_km;
   const UVindex = weatherData?.forecast?.forecastday[0].day.uv;
   const conditionText = weatherData?.current?.condition?.text;
-  const rain = weatherData?.forecast?.forecastday[0].hour;
+  const rain = weatherData?.forecast?.forecastday[selectedIndex].hour;
+  const condition = weatherData?.current?.condition;
+  const realFeel = weatherData?.current?.feelslike_f;
+  const pressureMB = weatherData?.current?.pressure_mb;
+  const windKM = Math.round(weatherData?.current?.wind_kph ?? 0);
+  const sunrise =
+    weatherData?.forecast?.forecastday[selectedIndex].astro.sunrise;
+  const sunset = weatherData?.forecast?.forecastday[selectedIndex].astro.sunset;
 
   const value = {
     timestamp: getTime(),
     weatherData,
     loadWeatherData,
+    setSelectedIndex,
+    selectedIndex,
+    temp,
     windStatus,
     humidity,
     dewpoint,
     visibility,
     UVindex,
     conditionText,
-    condition: weatherData?.current?.condition,
+    condition,
     rain,
+    realFeel,
+    pressureMB,
+    windKM,
+    sunrise,
+    sunset,
   };
 
   return (

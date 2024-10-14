@@ -22,7 +22,7 @@ export default function ThemeToggle() {
     <Switch
       checked={theme === "dark"}
       onChange={toggleTheme}
-      className="group relative h-[46px] w-[115px] cursor-pointer rounded-[20px] border border-[#626161] bg-background transition-colors duration-300 ease-in-out focus:outline-none"
+      className="group relative h-[46px] w-[115px] cursor-pointer rounded-[20px] border border-[#626161] bg-theme-toggle transition-colors duration-300 ease-in-out focus:outline-none"
     >
       <span
         aria-hidden="true"

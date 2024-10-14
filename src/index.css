@@ -15,12 +15,17 @@ body {
   --foreground: #ffffff;
   --faded: #818085;
 
+  --input: #1e1e1e;
+
   --card: #1b1b1d;
 
   --card-selected: #bbd7ec;
   --card-selected-header: #aecadf;
   --card-selected-text: #0f0f11;
   --card-selected-text-faded: #4f5658;
+
+  --theme-toggle: #19191b;
+  --forecast-toggle: #1e1e1e;
 
   /* --card-weekly-header: #e5e5e5;
   --card-weekly-content: #fdfdfd; */
@@ -40,14 +45,20 @@ body {
 }
 
 .light {
-  --background: #fffeee;
+  --background: #ffffff;
   --foreground: #111015;
   --faded: #818085;
 
-  --card: #a0cfff;
+  --input: #f1f0d8;
+
+  /* --card: #a0cfff; */
+  --card: #f1f0d8;
 
   --card-selected: #bbd7ec;
   --card-selected-header: #aecadf;
   --card-selected-text: #0f0f11;
   --card-selected-text-faded: #4f5658;
+
+  --theme-toggle: #f1f0d8;
+  --forecast-toggle: #f1f0d8;
 }

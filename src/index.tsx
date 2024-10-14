@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,6 +13,8 @@ const root = ReactDOM.createRoot(
 
 const initialTheme = localStorage.getItem("theme") ?? "dark";
 document.body.classList.add(initialTheme);
+
+Chart.register(CategoryScale);
 
 root.render(
   <React.StrictMode>

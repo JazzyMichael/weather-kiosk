@@ -20,9 +20,9 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full">
-      <div className="w-3/4 inline-flex justify-between">
-        <div className="inline-flex items-center gap-3">
+    <header className="w-full max-w-[1900px] m-auto flex justify-between">
+      <div className="md:w-3/4 inline-flex justify-between">
+        <div className="hidden md:inline-flex items-center gap-3">
           <button className="bg-[#1E1E1E] text-white h-[50px] w-[50px] rounded-full flex items-center justify-center">
             <GridIcon />
           </button>
@@ -35,13 +35,13 @@ export default function Header() {
             <div className="flex items-center gap-2 text-foreground">
               <MapPinIcon />
               <span>
-                {weatherData?.location?.name}, {weatherData?.location?.region}
+                {weatherData.location.name}, {weatherData.location.region}
               </span>
             </div>
           )}
         </div>
 
-        <div className="relative flex-grow inline-flex items-stretch focus-within:z-10 text-white max-w-[492px]">
+        <div className="relative flex-grow inline-flex items-stretch focus-within:z-10 text-foreground max-w-[492px]">
           <div className="pointer-events-none absolute inset-y-3 left-6">
             <MagnifyingGlassIcon />
           </div>
@@ -50,13 +50,13 @@ export default function Header() {
             name="search"
             autoComplete="off"
             placeholder="Search City"
-            className="bg-[#1E1E1E] outline-none text-white text-sm block w-full h-[46px] rounded-lg py-1.5 pl-16 placeholder:text-white sm:text-sm sm:leading-6 focus:ring-2 focus:ring-foreground"
+            className="bg-input outline-none text-sm block w-full h-[46px] rounded-lg py-1.5 pl-16 placeholder:text-foreground sm:text-sm sm:leading-6 shadow-sm transition focus:shadow-xl focus:ring-2 focus:ring-foreground"
             onKeyDown={(event) => event.key === "Enter" && search(event)}
           />
         </div>
       </div>
 
-      <div className="w-1/4 inline-flex justify-end gap-4">
+      <div className="md:w-1/4 inline-flex justify-end items-center gap-4">
         <ThemeToggle />
 
         <img
