@@ -10,6 +10,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.weekday-card {
+  width: 96px;
+}
+
+.weekday-card[data-isOpen="true"] {
+  width: 256px;
+}
+
 .dark {
   --background: #111015;
   --foreground: #ffffff;

@@ -1,6 +1,7 @@
 import { EyeIcon, WindStatusRectangle } from "../icons";
 import { useWeather } from "../weather-context";
 import humidityIcon from "../humidity-icon.png";
+import { motion } from "framer-motion";
 
 const bgURL =
   "https://s3-alpha-sig.figma.com/img/2468/6455/f33933b63012c284ff4e8adc22f40ae8?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BkEV-bJrbC~Ayco50J9ktpoTX4bopy8Cq3asqJ1q4mMQC9~Hey1Qlvm-PX1WnQ1dNEymVjYDw~MRndY-ItAzUdqa-qn~GEN0OwjSxnM6ThaLFM0SqM-qLiVtV-TC9c46kN2aA56rQIk6-L8WzTW951q5TkaDNrm7Gk5c877FKeINHHkDjyl1oPb2euDxbTJdYZrYgwFpZM4oz-gs8iaYU~ZVGQc2p7nMBD3udr8GcBH2m4QWxOyrkzPz2oQSZYhNFE1xll1U0zTTdmRzbuSABtKa29wPO1SmYguIfl-sUDK7hf~KF9GXGCnDRUxtcDkkY0j3XpYDTZulnZsM9WtKfQ__";
@@ -26,7 +27,12 @@ export default function DaySection() {
 
       <div className="grid md:grid-rows-2 grid-rows-5 grid-cols-1 md:grid-cols-3 grid-flow-col auto-cols-auto gap-5">
         {/* Grid Cards */}
-        <div className="bg-card h-[245px] rounded-[15px] py-6 px-4 flex flex-col justify-between">
+        <motion.div
+          className="bg-card h-[245px] rounded-[15px] py-6 px-4 flex flex-col justify-between"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
           <h2>Wind Status</h2>
           <WindStatusRectangle />
           <div className="flex justify-between gap-12">
@@ -36,9 +42,14 @@ export default function DaySection() {
             </p>
             <p className="text-sm">{timestamp}</p>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="bg-card h-[245px] rounded-[15px] py-6 px-4 flex flex-col justify-between">
+        <motion.div
+          className="bg-card h-[245px] rounded-[15px] py-6 px-4 flex flex-col justify-between"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
           <h2>Humidity</h2>
           <img
             src={condition?.icon}
@@ -69,9 +80,14 @@ export default function DaySection() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="bg-card h-[245px] rounded-[15px] py-6 px-4 flex flex-col justify-between">
+        <motion.div
+          className="bg-card h-[245px] rounded-[15px] py-6 px-4 flex flex-col justify-between"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
           <h2>UV Index</h2>
           <svg
             width="128"
@@ -110,9 +126,14 @@ export default function DaySection() {
             <span className="text-2xl font-semibold mr-2">{UVindex}</span>
             <span className="text-md font-medium">UV</span>
           </p>
-        </div>
+        </motion.div>
 
-        <div className="bg-card h-[245px] rounded-[15px] py-6 px-4 flex flex-col justify-between">
+        <motion.div
+          className="bg-card h-[245px] rounded-[15px] py-6 px-4 flex flex-col justify-between"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
           <h2>Visibility</h2>
           <img
             src={condition?.icon}
@@ -132,7 +153,7 @@ export default function DaySection() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Grid CTA */}
         <div
@@ -143,9 +164,14 @@ export default function DaySection() {
             Explore global map of wind weather and ocean condition
           </h5>
 
-          <button className="h-[80px] text-[#0F0F11] text-2xl font-bold rounded-[15px] bg-[#D9D9D9] uppercase px-12">
+          <motion.button
+            className="h-[80px] text-[#0F0F11] text-2xl font-bold rounded-[15px] bg-[#D9D9D9] uppercase px-12"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
             Get Started
-          </button>
+          </motion.button>
         </div>
       </div>
     </div>

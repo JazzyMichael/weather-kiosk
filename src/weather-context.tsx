@@ -33,6 +33,7 @@ export const WeatherProvider = ({
 }) => {
   const [weatherData, setWeatherData] = useState<any>({});
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const loadWeatherData = async (searchTerm: string) => {
     console.log("Loading weather", searchTerm);
@@ -40,13 +41,16 @@ export const WeatherProvider = ({
     try {
       const data = await fetch(apiURL + searchTerm).then((res) => res.json());
       setWeatherData({ ...data, searchTerm });
+      setLoading(false);
     } catch (e) {
       console.log("Could not load weather data", e);
+      setLoading(false);
     }
   };
 
   const requestLocationAccess = () => {
     console.log("Loading location");
+    setLoading(true);
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -83,6 +87,7 @@ export const WeatherProvider = ({
     requestLocationAccess,
     setSelectedIndex,
     selectedIndex,
+    loading,
     temp,
     windStatus,
     humidity,

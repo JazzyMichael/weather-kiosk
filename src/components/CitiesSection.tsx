@@ -1,4 +1,5 @@
 import { useWeather } from "../weather-context";
+import { motion } from "framer-motion";
 
 export default function CitiesSection() {
   const { loadWeatherData } = useWeather();
@@ -19,10 +20,13 @@ export default function CitiesSection() {
 
       <div className="flex flex-col gap-5">
         {data.map((x) => (
-          <div
+          <motion.div
             onClick={() => loadWeatherData(x.city)}
             key={x.city}
             className="flex justify-between items-center h-[110px] rounded-[15px] p-4 min-w-72 bg-card"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <div className="flex flex-col justify-between h-full">
               <div className="text-[14px] text-[#777777]">{x.country}</div>
@@ -34,7 +38,7 @@ export default function CitiesSection() {
               src="https://cdn.weatherapi.com/weather/64x64/day/113.png"
               className="size-[50px]"
             />
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
