@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
 const apiURL =
-  "http://api.weatherapi.com/v1/forecast.json?key=c6b3f1a152e044199de140419241210&days=7&q=";
+  "https://api.weatherapi.com/v1/forecast.json?key=c6b3f1a152e044199de140419241210&days=7&q=";
 
 const initialData: any = {
   weatherData: {},
@@ -35,15 +35,29 @@ export const WeatherProvider = ({
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const loadWeatherData = async (searchTerm: string) => {
-    console.log("Loading", searchTerm);
+    console.log("Loading weather", searchTerm);
 
     try {
       const data = await fetch(apiURL + searchTerm).then((res) => res.json());
-
       setWeatherData({ ...data, searchTerm });
     } catch (e) {
       console.log("Could not load weather data", e);
     }
+  };
+
+  const requestLocationAccess = () => {
+    console.log("Loading location");
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        loadWeatherData(`${latitude},${longitude}`);
+      },
+      (error) => {
+        console.log("permission denied", error);
+        alert("Must allow location sharing to use current location.");
+      }
+    );
   };
 
   const temp = weatherData?.current?.temp_f;
@@ -66,6 +80,7 @@ export const WeatherProvider = ({
     timestamp: getTime(),
     weatherData,
     loadWeatherData,
+    requestLocationAccess,
     setSelectedIndex,
     selectedIndex,
     temp,

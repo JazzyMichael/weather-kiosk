@@ -101,23 +101,10 @@ export default function WeekSection() {
     realFeel,
     pressureMB,
     windKM,
-    loadWeatherData,
+    requestLocationAccess,
     selectedIndex,
     setSelectedIndex,
   } = useWeather();
-
-  const requestLocationAccess = () => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        loadWeatherData(`${latitude},${longitude}`).then(console.log);
-      },
-      (error) => {
-        console.log("permission denied", error);
-        alert("Must allow location sharing to use current location.");
-      }
-    );
-  };
 
   if (!weatherData?.current) {
     return (
