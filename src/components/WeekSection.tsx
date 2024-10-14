@@ -34,7 +34,7 @@ const DayCard = ({
       layout
       data-isOpen={selected}
       onClick={(e) => onClick && onClick(e)}
-      whileHover={{ scale: 0.98 }}
+      whileHover={{ scale: 0.95 }}
       whileTap={{ scale: 0.92 }}
       transition={{ type: "spring", stiffness: 300, damping: 10 }}
       className="weekday-card h-[226px] rounded-[30px] bg-card flex flex-col items-center justify-between"
@@ -81,89 +81,7 @@ const DayCard = ({
           <span className="text-[32px] font-semibold mb-5">{display}</span>
         </>
       )}
-
-      {/* <div
-        className={
-          selected ? "min-w-[256px] transition" : "min-w-[96px] transition"
-        }
-      > */}
-
-      {/* </div> */}
     </motion.div>
-  );
-};
-
-const SimpleCard = ({
-  day,
-  icon,
-  weather,
-  onClick,
-}: {
-  day: string;
-  icon: string;
-  weather: any;
-  onClick?: Function;
-}) => (
-  <div
-    onClick={(e) => onClick && onClick(e)}
-    className="h-[226px] rounded-[30px] bg-card min-w-[96px] flex flex-col items-center justify-between pb-5"
-  >
-    <div className="uppercase border-b border-[#39393A] font-semibold p-3 w-full text-center">
-      {day.substring(0, 3)}
-    </div>
-
-    <img src={icon} className="size-[50px]" />
-
-    <span className="text-[32px] font-semibold">{weather}</span>
-  </div>
-);
-
-const DetailedCard = ({
-  day,
-  time,
-  weather,
-}: {
-  day: string;
-  time: string;
-  weather: any;
-}) => {
-  const properties = [
-    { label: "Real Feel", value: `${weather?.realFeel}°` },
-    { label: "Wind N-E.", value: `${weather?.windKM}km/h` },
-    { label: "Pressure", value: `${weather?.pressureMB}MB` },
-    { label: "Humidity", value: `${weather?.day.avghumidity}%` },
-    { label: "Sunrise", value: weather?.astro.sunrise },
-    { label: "Sunset", value: weather?.astro.sunset },
-  ];
-
-  return (
-    <div className="bg-[#BBD7EC] rounded-[25px] h-[226px] min-w-[256px]">
-      {/* Header */}
-      <div className="bg-[#AECADF] rounded-t-[25px] flex justify-between p-4 text-[#0F0F11] font-semibold">
-        <span>{day}</span>
-        <span>{time}</span>
-      </div>
-
-      {/* Content */}
-      <div className="p-3">
-        <div className="flex justify-between">
-          <span className="text-[36px] text-[#0F0F11] font-semibold">
-            {Math.round(weather.day.avgtemp_f)}&deg;
-          </span>
-
-          <img src={weather.day.condition.icon} />
-        </div>
-
-        <div className="grid grid-cols-2 grid-rows-4 grid-flow-col gap-1">
-          {properties.map(({ label, value }, i) => (
-            <div key={i} className={i === 0 ? "col-span-2 text-xs" : "text-xs"}>
-              <span className="text-gray-500">{label} </span>
-              <span className="text-black font-semibold">{value}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 };
 
