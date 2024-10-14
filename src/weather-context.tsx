@@ -45,6 +45,7 @@ export const WeatherProvider = ({
   const visibility = weatherData?.current?.vis_km;
   const UVindex = weatherData?.forecast?.forecastday[0].day.uv;
   const conditionText = weatherData?.current?.condition?.text;
+  const rain = weatherData?.forecast?.forecastday[0].hour;
 
   const value = {
     timestamp: getTime(),
@@ -57,6 +58,7 @@ export const WeatherProvider = ({
     UVindex,
     conditionText,
     condition: weatherData?.current?.condition,
+    rain,
   };
 
   return (

@@ -4,10 +4,12 @@ import { useWeather } from "../weather-context";
 
 const SimpleCard = ({
   day,
+  icon,
   weather,
   onClick,
 }: {
   day: string;
+  icon: string;
   weather: any;
   onClick?: Function;
 }) => (
@@ -19,11 +21,9 @@ const SimpleCard = ({
       {day.substring(0, 3)}
     </div>
 
-    <img src={weather.day.condition.icon} className="size-[50px]" />
+    <img src={icon} className="size-[50px]" />
 
-    <span className="text-[32px] font-bold">
-      {Math.round(weather?.day?.avgtemp_f)}&deg;
-    </span>
+    <span className="text-[32px] font-bold">{weather}</span>
   </div>
 );
 
@@ -77,7 +77,7 @@ const DetailedCard = ({
 };
 
 export default function WeekSection() {
-  const [enabled, setEnabled] = useState(false);
+  const [forecastToggle, setForecastToggle] = useState("forecast");
   const [selected, setSelected] = useState(0);
 
   const { weatherData, timestamp } = useWeather();
@@ -96,6 +96,14 @@ export default function WeekSection() {
 
   const weekData = [...dayNames.splice(dayIndex), ...dayNames];
 
+  if (!weatherData?.current) {
+    return (
+      <div className="py-40 text-center">
+        Search for a city or choose one from the list!
+      </div>
+    );
+  }
+
   return (
     <div className="flex-grow">
       {/* header */}
@@ -107,8 +115,10 @@ export default function WeekSection() {
         </div>
 
         <Switch
-          checked={enabled}
-          onChange={setEnabled}
+          checked={forecastToggle !== "forecast"}
+          onChange={(checked: boolean) =>
+            setForecastToggle(checked ? "air-quality" : "forecast")
+          }
           className="group inline-flex relative h-[30px] w-[163px] items-center rounded-full bg-[#1E1E1E] transition"
         >
           <span className="w-2/4 h-full translate-x-0 rounded-full bg-[#BBD7EC] transition duration-300 group-data-[checked]:translate-x-20" />
@@ -138,7 +148,15 @@ export default function WeekSection() {
               <SimpleCard
                 key={i}
                 day={day}
-                weather={weatherData.forecast.forecastday[i]}
+                icon={weatherData.forecast.forecastday[i].day.condition.icon}
+                weather={
+                  forecastToggle === "forecast"
+                    ? Math.round(
+                        weatherData.forecast.forecastday[i]?.day?.avgtemp_f
+                      ) + "°"
+                    : weatherData.forecast.forecastday[i]?.day?.avghumidity +
+                      "%"
+                }
                 onClick={() => setSelected(i)}
               />
             )

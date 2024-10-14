@@ -8,7 +8,7 @@ import { WeatherProvider } from "./weather-context";
 function App() {
   return (
     <WeatherProvider>
-      <div className="bg-background text-foreground p-5">
+      <div className="bg-background text-foreground p-5 min-h-screen">
         <Header />
 
         <div className="flex">

@@ -14,6 +14,10 @@ export default function DaySection() {
     timestamp,
   } = useWeather();
 
+  if (!windStatus) {
+    return <div></div>;
+  }
+
   return (
     <div className="flex-grow">
       <h4 className="py-8">Today's Overview</h4>
